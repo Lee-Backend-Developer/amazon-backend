@@ -23,25 +23,34 @@ create table product
 
 create table cart
 (
-    id          int auto_increment comment '카트_고유번호',
-    product_fk  int comment '제품_fk',
-    product_cnt int comment '제품_담을수량',
-    member_fk   int comment '회원_고유번호',
+    id              int auto_increment comment '카트_고유번호',
+    member_fk       int comment '회원_고유번호',
 
     constraint cart_id primary key (id),
-    constraint cart_product_fk foreign key (product_fk) references product (id),
     constraint cart_member_fk foreign key (member_fk) references member (id)
+);
+
+create table cart_product
+(
+    id          int auto_increment comment '카트_제품_고유번호',
+    product_fk  int comment '제품_fk',
+    cart_fk     int comment '카트_fk',
+    product_cnt int comment '제품_수량',
+
+    constraint cart_product_id primary key (id),
+    constraint cart_product_cart_fk foreign key (cart_fk) references cart (id),
+    constraint cart_product_product_fk foreign key (product_fk) references product (id)
 );
 
 create table orders
 (
     id          int auto_increment comment '주문_고유번호',
-    product_fk  int comment '제품_fk',
+    cart_fk     int comment '카트_fk',
     member_fk   int comment '회원_fk',
     product_cnt int comment '제품_수량',
 
     constraint orders_id primary key (id),
-    constraint orders_product_fk foreign key (product_fk) references product (id),
+    constraint orders_product_fk foreign key (cart_fk) references product (id),
     constraint orders_member_fk foreign key (member_fk) references member (id)
 );
 
@@ -53,8 +62,8 @@ create table delivery
     state     enum ('ordered','ready','delivered'),
 
     constraint delivery_id primary key (id),
-    constraint delivery_member_fk foreign key (member_fk) references member(id),
-    constraint delevery_order_fk foreign key (orders_fk) references orders(id)
+    constraint delivery_member_fk foreign key (member_fk) references member (id),
+    constraint delevery_order_fk foreign key (orders_fk) references orders (id)
 );
 
 create table category
