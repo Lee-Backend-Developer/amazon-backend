@@ -1,1 +1,15 @@
-spring.application.name=amazon
+spring:
+  application:
+    name: amazon
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/amazon?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: toor
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        show_sql: true
+
