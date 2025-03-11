@@ -20,10 +20,6 @@ public class Category {
 
     private String name;
 
-    @OneToMany
-    private List<Product> products = new ArrayList<>();
-
-
     @Builder
     public Category(String name) {
         this.name = name;

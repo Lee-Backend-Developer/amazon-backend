@@ -11,10 +11,10 @@ public class CartProduct {
     private Long id;
 
     @ManyToOne
-    private Product product;
+    private Product productFk;
 
     @ManyToOne
-    private Cart cart;
+    private Cart cartFk;
 
     private int productCnt;
 }

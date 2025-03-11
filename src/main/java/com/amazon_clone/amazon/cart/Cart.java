@@ -2,10 +2,7 @@ package com.amazon_clone.amazon.cart;
 
 import com.amazon_clone.amazon.CartProduct.CartProduct;
 import com.amazon_clone.amazon.member.Member;
-import com.amazon_clone.amazon.product.Product;
 import jakarta.persistence.*;
-
-import java.util.List;
 
 @Entity
 public class Cart {
@@ -15,9 +12,9 @@ public class Cart {
     private long id;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Member member;
+    private Member memberFk;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private CartProduct product;
+/*    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private CartProduct cartProductFk;*/
 
 }

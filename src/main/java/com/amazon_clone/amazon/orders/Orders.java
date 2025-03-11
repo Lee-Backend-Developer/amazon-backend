@@ -13,8 +13,8 @@ public class Orders {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Member member;
+    private Member memberFk;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Cart cart;
+    private Cart cartFk;
 }
