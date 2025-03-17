@@ -14,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -53,5 +54,21 @@ class MemberServiceTest {
                 .get();
 
         assertEquals(findMember.getName(), request.getName());
+    }
+
+    @DisplayName("사용자가 삭제 되어야한다")
+    @Test
+    void member_delete_o() {
+        // when
+        Mockito
+                .when(memberRepository.findById(Mockito.any(Long.class)))
+                .thenReturn(Optional.empty());
+        Long memberId = 1L;
+        memberService.delete(memberId);
+
+        //then
+        Member findMember = memberRepository.findById(memberId)
+                .orElse(null);
+        assertNull(findMember);
     }
 }

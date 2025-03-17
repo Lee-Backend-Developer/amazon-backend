@@ -23,4 +23,9 @@ public class MemberService {
                 .build();
         memberRepository.save(saveMember);
     }
+
+    @Transactional
+    public void delete(Long memberId) {
+        memberRepository.deleteById(memberId);
+    }
 }
