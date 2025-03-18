@@ -14,7 +14,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public void save(MemberCreate request) {
+    public void register(MemberCreate request) {
         Member saveMember = Member.builder()
                 .name(request.getName())
                 .role(request.getRole())
@@ -25,7 +25,7 @@ public class MemberService {
     }
 
     @Transactional
-    public void delete(Long memberId) {
+    public void leave(Long memberId) {
         memberRepository.deleteById(memberId);
     }
 }

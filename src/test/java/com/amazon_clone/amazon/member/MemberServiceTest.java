@@ -27,6 +27,12 @@ class MemberServiceTest {
     @Mock
     private MemberRepository memberRepository;
 
+    @DisplayName("사용자가 로그인이 되어야한다.")
+    @Test
+    void login() {
+
+    }
+
     @DisplayName("사용자가 추가 되어야한댜")
     @Test
     void member_add_o() {
@@ -46,7 +52,7 @@ class MemberServiceTest {
                         .role(Role.ADMIN)
                         .build()));
 
-        memberService.save(request);
+        memberService.register(request);
 
         //then 이 결과가 나와야한다.
 
@@ -58,13 +64,13 @@ class MemberServiceTest {
 
     @DisplayName("사용자가 삭제 되어야한다")
     @Test
-    void member_delete_o() {
+    void member_leave_o() {
         // when
         Mockito
                 .when(memberRepository.findById(Mockito.any(Long.class)))
                 .thenReturn(Optional.empty());
         Long memberId = 1L;
-        memberService.delete(memberId);
+        memberService.leave(memberId);
 
         //then
         Member findMember = memberRepository.findById(memberId)
