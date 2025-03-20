@@ -16,6 +16,8 @@ public class Member {
     private Long id;
 
     private String name;
+    private String email;
+    private String password;
     private String phoneNumber;
     private String address;
 
@@ -23,8 +25,10 @@ public class Member {
     private Role role;
 
     @Builder
-    public Member(String name, String phoneNumber, String address, Role role) {
+    public Member(String name, String email, String password, String phoneNumber, String address, Role role) {
         this.name = name;
+        this.email = email;
+        this.password = password;
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.role = Objects.isNull(role) ? Role.USER : role;
