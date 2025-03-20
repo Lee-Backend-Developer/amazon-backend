@@ -2,10 +2,14 @@ package com.amazon_clone.amazon.member;
 
 import com.amazon_clone.amazon.member.domain.Member;
 import com.amazon_clone.amazon.member.repository.MemberRepository;
-import com.amazon_clone.amazon.member.request.MemberCreate;
+import com.amazon_clone.amazon.member.request.MemberLogin;
+import com.amazon_clone.amazon.member.request.MemberRegister;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -14,7 +18,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public void register(MemberCreate request) {
+    public void register(MemberRegister request) {
         Member saveMember = Member.builder()
                 .name(request.getName())
                 .role(request.getRole())
@@ -27,5 +31,10 @@ public class MemberService {
     @Transactional
     public void leave(Long memberId) {
         memberRepository.deleteById(memberId);
+    }
+
+    public Member login(MemberLogin login) {
+        Optional<Member> byEmailAndPassword = memberRepository.findByEmailAndPassword(login.getEmail(), login.getPassword());
+        return byEmailAndPassword.get();
     }
 }
