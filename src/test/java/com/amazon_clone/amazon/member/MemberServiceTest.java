@@ -3,7 +3,8 @@ package com.amazon_clone.amazon.member;
 import com.amazon_clone.amazon.member.domain.Member;
 import com.amazon_clone.amazon.member.domain.Role;
 import com.amazon_clone.amazon.member.repository.MemberRepository;
-import com.amazon_clone.amazon.member.request.MemberCreate;
+import com.amazon_clone.amazon.member.request.MemberLogin;
+import com.amazon_clone.amazon.member.request.MemberRegister;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,14 +31,25 @@ class MemberServiceTest {
     @DisplayName("사용자가 로그인이 되어야한다.")
     @Test
     void login() {
+        // given
+        MemberLogin login = new MemberLogin("admin@naver.com", "password");
 
+
+        // when
+        Mockito.when(memberRepository.findByEmailAndPassword(login.getEmail(), login.getPassword()))
+                .thenReturn(Optional.of(new Member("admin", "admin@naver.com", "password", "010-0000-0000", "경기도 안성시", Role.USER)));
+
+        Member loginMember = memberService.login(login);
+
+        // then
+        assertNotNull(loginMember);
     }
 
     @DisplayName("사용자가 추가 되어야한댜")
     @Test
     void member_add_o() {
         //given 무엇을 줬을 때
-        MemberCreate request = MemberCreate.builder()
+        MemberRegister request = MemberRegister.builder()
                 .name("어드민")
                 .address("경기도")
                 .role(Role.ADMIN)
