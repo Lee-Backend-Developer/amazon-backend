@@ -1,7 +1,7 @@
 package com.amazon_clone.amazon.CartProduct;
 
 import com.amazon_clone.amazon.cart.Cart;
-import com.amazon_clone.amazon.product.Product;
+import com.amazon_clone.amazon.product.domain.Product;
 import jakarta.persistence.*;
 
 @Entity
