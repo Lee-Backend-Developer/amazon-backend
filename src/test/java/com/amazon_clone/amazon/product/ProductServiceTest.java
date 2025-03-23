@@ -48,6 +48,22 @@ class ProductServiceTest {
         Assertions.assertEquals("제품",
                 productRepository.findAll().getFirst().getName()
         );
+    }
 
+    @DisplayName("제품이 삭제가 되어야한다")
+    @Test
+    void product_delete_O() {
+        //given
+
+        //when
+        Long productId = 1L;
+        productService.delete(productId);
+
+        // <<mock 객체 생성 >>
+        Mockito.when(productRepository.findById(productId))
+                .thenReturn(null);
+
+        //then
+        Assertions.assertNull(productRepository.findById(productId));
     }
 }
