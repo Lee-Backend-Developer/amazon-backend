@@ -1,0 +1,12 @@
+### 회원가입
+POST http://127.0.0.1:8080/api/member/register
+Content-Type: application/json
+
+{
+  "email" : "admin@naver.com",
+  "password" : "1234",
+  "address" : "경기도",
+  "name" : "lee",
+  "phoneNumber" : "010-1234-1234",
+  "role": "USER"
+}

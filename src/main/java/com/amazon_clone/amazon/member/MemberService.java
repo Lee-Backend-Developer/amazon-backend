@@ -18,14 +18,16 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public void register(MemberRegister request) {
+    public Member register(MemberRegister request) {
         Member saveMember = Member.builder()
+                .email(request.getEmail())
+                .password(request.getPassword())
                 .name(request.getName())
                 .role(request.getRole())
                 .address(request.getAddress())
                 .phoneNumber(request.getPhoneNumber())
                 .build();
-        memberRepository.save(saveMember);
+        return memberRepository.save(saveMember);
     }
 
     @Transactional

@@ -13,6 +13,9 @@ public abstract class MemberRequest {
     private String address;
     private Role role;
 
+    public MemberRequest() {
+    }
+
     // 로그인
     public MemberRequest(String email, String password) {
         this.email = email;
@@ -20,7 +23,9 @@ public abstract class MemberRequest {
     }
 
     // 회원가입
-    public MemberRequest(String name, String phoneNumber, String address, Role role) {
+    public MemberRequest(String email, String password, String name, String phoneNumber, String address, Role role) {
+        this.email = email;
+        this.password = password;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.address = address;
