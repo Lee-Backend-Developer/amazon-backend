@@ -11,6 +11,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.ArrayList;
 
@@ -50,11 +52,26 @@ class ProductServiceTest {
         );
     }
 
+    @DisplayName("상품이 조회 되어야한다")
+    @Test
+    void product_find() {
+        //when
+        //<< mock 생성 >>
+        ArrayList<Product> products = new ArrayList<>();
+        products.add(new Product("제품", 10, "main.jpg", 10000, "이 제품은 제품 입니다"));
+
+        when(productRepository.findAll(PageRequest.of(0, 10)).getContent())
+                .thenReturn(products);
+
+        Page<Product> findPage = productService.productPages(PageRequest.of(0, 10));
+
+        //then
+        Assertions.assertEquals(1, findPage.getContent().getFirst().getName());
+    }
+
     @DisplayName("제품이 삭제가 되어야한다")
     @Test
     void product_delete_O() {
-        //given
-
         //when
         Long productId = 1L;
         productService.delete(productId);
