@@ -34,4 +34,12 @@ public class MemberController {
         return new ResponseEntity<>(memberResponse, HttpStatus.CREATED);
     }
 
+    //회원탈퇴
+    @DeleteMapping("leave/{id}")
+    public ResponseEntity<Response> leave(@PathVariable Long id) {
+        memberService.leave(id);
+        MemberResponse memberResponse = new MemberResponse(null, HttpStatus.OK);
+        return new ResponseEntity<>(memberResponse, HttpStatus.OK);
+    }
+
 }
