@@ -5,12 +5,14 @@ import com.amazon_clone.amazon.member.repository.MemberRepository;
 import com.amazon_clone.amazon.member.request.MemberLogin;
 import com.amazon_clone.amazon.member.request.MemberRegister;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 @Transactional(readOnly = true)
@@ -36,7 +38,7 @@ public class MemberService {
     }
 
     public Member login(MemberLogin login) {
-        Optional<Member> byEmailAndPassword = memberRepository.findByEmailAndPassword(login.getEmail(), login.getPassword());
-        return byEmailAndPassword.get();
+        Optional<Member> getMember = memberRepository.findByEmailAndPassword(login.getEmail(), login.getPassword());
+        return getMember.get();
     }
 }
