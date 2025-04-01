@@ -6,7 +6,7 @@ create table member
     password     varchar(255)           not null comment '로그인_비밀번호',
     phone_number varchar(255)           not null comment '전화번호',
     address      varchar(255) comment '집주소',
-    role         enum ('user', 'admin') not null default 'user' comment '권한',
+    role         enum ('USER', 'ADMIN') not null default 'user' comment '권한',
 
     constraint member_pk primary key (id)
 );
