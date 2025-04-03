@@ -1,4 +1,4 @@
-package com.amazon_clone.amazon.category;
+package com.amazon_clone.amazon.category.domain;
 
 import jakarta.persistence.*;
 import lombok.Builder;
