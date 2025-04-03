@@ -24,7 +24,7 @@ public class ProductService {
     }
 
     @Transactional
-    public void add(ProductAddRequest productAddRequest) {
+    public Product add(ProductAddRequest productAddRequest) {
         Product saveProduct = Product.builder()
                 .name(productAddRequest.getName())
                 .description(productAddRequest.getDescription())
@@ -33,7 +33,7 @@ public class ProductService {
                 .price(productAddRequest.getPrice())
                 .build();
 
-        productRepository.save(saveProduct);
+        return productRepository.save(saveProduct);
 
     }
 

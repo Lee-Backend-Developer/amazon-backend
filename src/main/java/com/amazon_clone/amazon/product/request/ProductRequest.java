@@ -10,6 +10,9 @@ public abstract class ProductRequest {
     private int price;
     private String description;
 
+    public ProductRequest() {
+    }
+
     // 제품을 생성
     public ProductRequest(String name, int cnt, String mainImage, int price, String description) {
         this.name = name;
