@@ -11,6 +11,14 @@ create table member
     constraint member_pk primary key (id)
 );
 
+create table category
+(
+    id            bigint auto_increment comment '카테고리_고유번호',
+    name          varchar(255) not null comment '카테고리_이름',
+
+    constraint category_fk primary key (id)
+);
+
 create table product
 (
     id          bigint auto_increment comment '제품_고유번호',
@@ -19,8 +27,10 @@ create table product
     main_image  varchar(255),
     price       int          not null default 0 comment '제품 가격',
     description longtext comment '제품설명',
+    category_fk_id bigint not null comment '카테고리_fk',
 
-    constraint product_fk primary key (id)
+    constraint product_fk primary key (id),
+    constraint product_category_fk foreign key (category_fk_id) references category(id)
 );
 
 create table cart
@@ -68,15 +78,6 @@ create table delivery
     constraint delevery_order_fk foreign key (orders_fk_id) references orders (id)
 );
 
-create table category
-(
-    id            bigint auto_increment comment '카테고리_고유번호',
-    name          varchar(255) not null comment '카테고리_이름',
-    product_fk_id bigint       not null comment '제품_fk',
-
-    constraint category_fk primary key (id),
-    constraint category_product_fk foreign key (product_fk_id) references product (id)
-);
 
 create table review
 (
