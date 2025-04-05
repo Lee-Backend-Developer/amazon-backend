@@ -40,7 +40,7 @@ create table cart
 
     constraint cart_id primary key (id),
     constraint cart_member_fk foreign key (member_fk_id) references member (id)
-);
+) comment '각 회원고유번호를 가지고 카트 고유번호 생성 하고 cart_product 연결';
 
 create table cart_product
 (
