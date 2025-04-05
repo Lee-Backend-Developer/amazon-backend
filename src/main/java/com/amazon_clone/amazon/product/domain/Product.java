@@ -1,9 +1,7 @@
 package com.amazon_clone.amazon.product.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.amazon_clone.amazon.category.domain.Category;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,12 +21,16 @@ public class Product {
     private int price;
     private String description;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Category categoryFk;
+
     @Builder
-    public Product(String name, int cnt, String mainImage, int price, String description) {
+    public Product(String name, int cnt, String mainImage, int price, String description, Category categoryFk) {
         this.name = name;
         this.cnt = cnt;
         this.mainImage = mainImage;
         this.price = price;
         this.description = description;
+        this.categoryFk = categoryFk;
     }
 }

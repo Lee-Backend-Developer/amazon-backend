@@ -1,9 +1,13 @@
 package com.amazon_clone.amazon.category.domain;
 
+import com.amazon_clone.amazon.product.domain.Product;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
