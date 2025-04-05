@@ -7,3 +7,6 @@ select
     cp.product_cnt as '제품수량'
     from cart c inner join cart_product cp
 on c.id = cp.cart_fk_id;
+
+# 카테고리 별 제품 가져오기
+select * from product where category_fk_id = 1;
