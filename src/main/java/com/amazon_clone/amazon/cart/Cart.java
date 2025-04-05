@@ -13,7 +13,4 @@ public class Cart {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Member memberFk;
 
-/*    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private CartProduct cartProductFk;*/
-
 }
