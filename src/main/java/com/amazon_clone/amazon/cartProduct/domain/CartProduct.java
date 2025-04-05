@@ -1,6 +1,5 @@
-package com.amazon_clone.amazon.cartProduct;
+package com.amazon_clone.amazon.cartProduct.domain;
 
-import com.amazon_clone.amazon.cart.domain.Cart;
 import com.amazon_clone.amazon.product.domain.Product;
 import jakarta.persistence.*;
 
