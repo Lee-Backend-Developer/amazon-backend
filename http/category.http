@@ -5,3 +5,6 @@ Content-Type: application/json
 {
   "name" : "디지털"
 }
+
+### 카테고리 삭제
+DELETE 127.0.0.1:8080/api/category/delete/1

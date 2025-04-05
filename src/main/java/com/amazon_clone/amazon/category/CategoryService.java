@@ -24,4 +24,8 @@ public class CategoryService {
         return categoryRepository.save(saveCategory);
     }
 
+    @Transactional
+    public void deleteCategory(Long id) {
+        categoryRepository.deleteById(id);
+    }
 }
