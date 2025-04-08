@@ -39,9 +39,14 @@ public class CartService {
                 .build();
 
         return CartDto.builder()
-                .cartId(findCart.getId())
-                .productId(findProduct.getId())
-                .productCnt(request.getProductCnt())
+                .cartId(saveCartProduct.getId())
+                .productId(saveCartProduct.getId())
+                .productCnt(saveCartProduct.getProductCnt())
                 .build();
+    }
+
+    @Transactional
+    public void deleteCart(Long id) {
+        cartRepository.deleteById(id);
     }
 }
