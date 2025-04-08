@@ -2,7 +2,9 @@ package com.amazon_clone.amazon.cartProduct.domain;
 
 import com.amazon_clone.amazon.member.domain.Member;
 import jakarta.persistence.*;
+import lombok.Getter;
 
+@Getter
 @Entity
 public class Cart {
 

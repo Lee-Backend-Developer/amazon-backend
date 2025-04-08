@@ -1,14 +1,20 @@
 package com.amazon_clone.amazon.cartProduct.request;
 
+import lombok.Data;
+
+@Data
 public class CartRequest {
-    private String productId;
-    private Long memberId;
+    private Long productId;
+    private int productCnt;
+    private Long cartId;
 
     public CartRequest() {
     }
 
-    public CartRequest(String productId, Long memberId) {
+    // 카트담기
+    public CartRequest(Long productId, int productCnt, Long cartId) {
         this.productId = productId;
-        this.memberId = memberId;
+        this.productCnt = productCnt;
+        this.cartId = cartId;
     }
 }

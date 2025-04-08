@@ -1,0 +1,9 @@
+# 물건 담기
+PUT http://127.0.0.1:8080/api/cart/add
+Content-Type: application/json
+
+{
+  "cartId": 1,
+  "productCnt": 1,
+  "productId": 4
+}

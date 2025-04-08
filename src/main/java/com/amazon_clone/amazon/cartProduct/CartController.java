@@ -1,5 +1,8 @@
 package com.amazon_clone.amazon.cartProduct;
 
+import com.amazon_clone.amazon.cartProduct.domain.CartProduct;
+import com.amazon_clone.amazon.cartProduct.dto.CartDto;
+import com.amazon_clone.amazon.cartProduct.request.CartAdd;
 import com.amazon_clone.amazon.cartProduct.request.CartRequest;
 import com.amazon_clone.amazon.cartProduct.response.CartResponse;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +22,10 @@ public class CartController {
     private final CartService cartService;
 
     @PutMapping("add")
-    public ResponseEntity<CartResponse> addCart(@RequestBody CartRequest cart) {
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<CartResponse> addCart(@RequestBody CartAdd request) {
+        CartDto cartDto = cartService.cartAdd(request);
+        CartResponse response = new CartResponse(cartDto, HttpStatus.CREATED);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
 }
