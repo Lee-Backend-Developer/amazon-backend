@@ -26,7 +26,7 @@ public class CartController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<CartResponse> deleteCart(@PathVariable Long id) {
+    public ResponseEntity<CartResponse> deleteCart(@PathVariable("id") Long id) {
         cartService.deleteCart(id);
         CartResponse response = new CartResponse(null, HttpStatus.OK);
         return new ResponseEntity<>(response, HttpStatus.OK);

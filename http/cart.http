@@ -7,3 +7,8 @@ Content-Type: application/json
   "productCnt": 1,
   "productId": 4
 }
+
+
+### 물건삭제
+DELETE 127.0.0.1:8080/api/cart/delete/1
+
