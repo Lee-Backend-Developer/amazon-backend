@@ -10,3 +10,5 @@ on c.id = cp.cart_fk_id;
 
 # 카테고리 별 제품 가져오기
 select * from product where category_fk_id = 1;
+
+select * from cart where id = 1;
