@@ -69,12 +69,10 @@ create table orders
 create table delivery
 (
     id           bigint auto_increment comment '배송_고유번호',
-    member_fk_id bigint comment '회원_fk',
     orders_fk_id bigint comment '주문_fk',
     state        enum ('ordered','ready','delivered'),
 
     constraint delivery_id primary key (id),
-    constraint delivery_member_fk foreign key (member_fk_id) references member (id),
     constraint delevery_order_fk foreign key (orders_fk_id) references orders (id)
 );
 
