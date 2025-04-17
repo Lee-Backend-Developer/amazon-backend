@@ -1,0 +1,7 @@
+PUT http://127.0.0.1:8080/api/order/create
+Content-Type: application/json
+
+{
+  "memberFk": 1,
+  "cartFk": 1
+}
