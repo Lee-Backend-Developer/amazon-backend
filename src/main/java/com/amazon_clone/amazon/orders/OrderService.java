@@ -39,7 +39,8 @@ public class OrderService {
         ordersNumberGeneratorRepository.save(saveOrderNumberGenerator);
 
         // 카트에 있는 제품을 주문에 추가
-        cartProductRepository.findByCartFk_Id(request.getCartFk())
+        cartProductRepository
+                .findByCartFk_Id(request.getCartFk())
                         .forEach(cartProduct -> {
                             OrdersProduct createdOrdersProduct = OrdersProduct.builder()
                                     .ordersNumberGeneratorFk(saveOrderNumberGenerator)
@@ -47,6 +48,8 @@ public class OrderService {
                                     .productCnt(cartProduct.getProductCnt())
                                     .build();
                             orderProductRepository.save(createdOrdersProduct);
+                            // 카트에 담긴 제품 삭제
+                            cartProductRepository.delete(cartProduct);
                         });
 
         return saveOrderNumberGenerator;
