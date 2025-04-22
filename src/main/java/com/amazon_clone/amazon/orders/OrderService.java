@@ -7,13 +7,18 @@ import com.amazon_clone.amazon.member.repository.MemberRepository;
 import com.amazon_clone.amazon.orders.domain.DeliveryStatus;
 import com.amazon_clone.amazon.orders.domain.OrdersProduct;
 import com.amazon_clone.amazon.orders.domain.OrdersNumberGenerator;
+import com.amazon_clone.amazon.orders.dto.repostiroyDto.OrderDto;
+import com.amazon_clone.amazon.orders.dto.response.GetOrderResponse;
 import com.amazon_clone.amazon.orders.repository.OrderProductRepository;
 import com.amazon_clone.amazon.orders.repository.OrdersNumberGeneratorRepository;
-import com.amazon_clone.amazon.orders.request.OrderAddRequest;
+import com.amazon_clone.amazon.orders.dto.request.OrderAddRequest;
 import com.amazon_clone.amazon.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -54,4 +59,27 @@ public class OrderService {
 
         return saveOrderNumberGenerator;
     }
+
+    public List<GetOrderResponse> getOrderList(Long memberId) {
+        List<OrderDto> orders = orderProductRepository.findByOrders(memberId);
+
+        List<GetOrderResponse> getOrderResponseList = orders
+                .stream()
+                .map(dto -> {
+                    List<GetOrderResponse.ProductInfo> productInfos = dto.getProductList()
+                            .stream()
+                            .map(product -> new GetOrderResponse.ProductInfo(product.getName(), product.getPrice()))
+                            .toList();
+
+                    return GetOrderResponse.builder()
+                            .orderNumber(dto.getOrderNumber())
+                            .deliveryStatus(dto.getDeliveryStatus().getStatus())
+                            .orderProductPrice(dto.getOrderProductPrice())
+                            .productList(productInfos)
+                            .build();
+                }).toList();
+
+        return getOrderResponseList;
+    }
+
 }

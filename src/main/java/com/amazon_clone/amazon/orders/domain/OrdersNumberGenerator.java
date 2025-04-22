@@ -1,6 +1,9 @@
 package com.amazon_clone.amazon.orders.domain;
 
 import com.amazon_clone.amazon.member.domain.Member;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonValue;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;

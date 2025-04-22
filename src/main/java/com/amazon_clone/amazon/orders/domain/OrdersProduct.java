@@ -1,6 +1,7 @@
 package com.amazon_clone.amazon.orders.domain;
 
 import com.amazon_clone.amazon.product.domain.Product;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
