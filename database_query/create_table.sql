@@ -58,7 +58,7 @@ create table orders_number_generator
 (
     id        bigint auto_increment comment '주문_고유번호',
     member_fk_id bigint comment '회원_고유번호_fk',
-    delivery_status  enum ('ordered','ready','delivered') comment '배송상태',
+    delivery_status  enum ('ORDERED','READY','DELIVERED') comment '배송상태',
 
     constraint orders_id primary key (id),
     constraint orders_number_generator_member_fk foreign key (member_fk_id) references member (id)

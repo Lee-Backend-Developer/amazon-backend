@@ -12,3 +12,10 @@ on c.id = cp.cart_fk_id;
 select * from product where category_fk_id = 1;
 
 select * from cart where id = 1;
+select * from cart_product;
+
+# 주문한 상품 조회하기 쿼리
+# 1. 주문번호는 하나, 주문한 상품들을 조회하기
+select ong.id '주문번호', (select name from product where id = op.product_fk_id) '주문한 상품' from orders_number_generator ong
+    inner join orders_product op
+        on op.orders_number_generator_fk_id = ong.id;
