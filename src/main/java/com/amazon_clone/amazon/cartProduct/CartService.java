@@ -61,6 +61,7 @@ public class CartService {
         List<CartDto> cartDtos = new ArrayList<>();
         for (CartProduct cartProduct : cartProducts) {
             CartDto cartDto = CartDto.builder()
+                    .cartId(cartProduct.getId())
                     .productId(cartProduct.getProductFk().getId())
                     .productCnt(cartProduct.getProductCnt())
                     .build();
