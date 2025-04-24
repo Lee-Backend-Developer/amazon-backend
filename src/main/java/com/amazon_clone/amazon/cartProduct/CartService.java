@@ -13,6 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Slf4j
 @RequiredArgsConstructor
 @Service
@@ -47,5 +50,23 @@ public class CartService {
     @Transactional
     public void deleteCart(Long id) {
         cartProductRepository.deleteById(id);
+    }
+
+    public List<CartDto> getCart(Long memberId) {
+        // 1. 카트 번호를 가져온다
+        Cart cartList = cartRepository.findByMemberFk_Id(memberId);
+        // 2. 카트번호를 가지고 제품을 가져온다
+        List<CartProduct> cartProducts = cartProductRepository.findByCartFk_Id(cartList.getId());
+
+        List<CartDto> cartDtos = new ArrayList<>();
+        for (CartProduct cartProduct : cartProducts) {
+            CartDto cartDto = CartDto.builder()
+                    .productId(cartProduct.getProductFk().getId())
+                    .productCnt(cartProduct.getProductCnt())
+                    .build();
+            cartDtos.add(cartDto);
+        }
+
+        return cartDtos;
     }
 }

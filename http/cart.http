@@ -5,9 +5,12 @@ Content-Type: application/json
 {
   "cartId": 1,
   "productCnt": 1,
-  "productId": 4
+  "productId": 1
 }
 
+
+### 카트 물건 조회
+GET http://127.0.0.1:8080/api/cart
 
 ### 물건삭제
 DELETE 127.0.0.1:8080/api/cart/delete/1

@@ -1,9 +1,7 @@
 package com.amazon_clone.amazon.cartProduct;
 
-import com.amazon_clone.amazon.cartProduct.domain.CartProduct;
 import com.amazon_clone.amazon.cartProduct.dto.CartDto;
 import com.amazon_clone.amazon.cartProduct.request.CartAdd;
-import com.amazon_clone.amazon.cartProduct.request.CartRequest;
 import com.amazon_clone.amazon.cartProduct.response.CartResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,12 +9,21 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/cart")
 public class CartController {
     private final CartService cartService;
+
+    @GetMapping
+    public ResponseEntity<CartResponse> getCart() {
+        List<CartDto> cartDtos = cartService.getCart(1L);
+        CartResponse response = new CartResponse(cartDtos, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
     @PutMapping("add")
     public ResponseEntity<CartResponse> addCart(@RequestBody CartAdd request) {
