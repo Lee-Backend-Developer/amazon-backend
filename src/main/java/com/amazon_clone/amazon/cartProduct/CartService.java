@@ -39,8 +39,7 @@ public class CartService {
                 .build();
 
         return CartDto.builder()
-                .cartId(saveCartProduct.getId())
-                .productId(saveCartProduct.getId())
+                .productId(findProduct.getId())
                 .productCnt(saveCartProduct.getProductCnt())
                 .build();
     }
