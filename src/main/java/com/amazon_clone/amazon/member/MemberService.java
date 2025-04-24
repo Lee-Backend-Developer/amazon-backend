@@ -4,6 +4,7 @@ import com.amazon_clone.amazon.member.domain.Member;
 import com.amazon_clone.amazon.member.repository.MemberRepository;
 import com.amazon_clone.amazon.member.request.MemberLogin;
 import com.amazon_clone.amazon.member.request.MemberRegister;
+import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,10 @@ public class MemberService {
 
     @Transactional
     public Member register(MemberRegister request) {
+        // 중복 회원이 있는지 확인
+        if(!memberRepository.findByEmailEquals(request.getEmail()).isEmpty())
+            throw new EntityExistsException("이미 존재하는 회원입니다.");
+
         Member saveMember = Member.builder()
                 .email(request.getEmail())
                 .password(request.getPassword())
