@@ -32,11 +32,11 @@ public class CartService {
         Product findProduct = productRepository.findById(request.getProductId())
                 .get();
 
-        CartProduct saveCartProduct = CartProduct.builder()
+        CartProduct saveCartProduct = cartProductRepository.save(CartProduct.builder()
                 .productFk(findProduct)
                 .cartFk(findCart)
                 .productCnt(request.getProductCnt())
-                .build();
+                .build());
 
         return CartDto.builder()
                 .productId(findProduct.getId())
