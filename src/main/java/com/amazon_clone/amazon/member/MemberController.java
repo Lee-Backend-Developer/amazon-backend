@@ -2,9 +2,10 @@ package com.amazon_clone.amazon.member;
 
 import com.amazon_clone.amazon.common.Response;
 import com.amazon_clone.amazon.member.domain.Member;
-import com.amazon_clone.amazon.member.request.MemberLogin;
-import com.amazon_clone.amazon.member.request.MemberRegister;
-import com.amazon_clone.amazon.member.response.MemberResponse;
+import com.amazon_clone.amazon.member.dto.request.MemberLogin;
+import com.amazon_clone.amazon.member.dto.request.MemberRegister;
+import com.amazon_clone.amazon.member.dto.response.MemberLoginResponse;
+import com.amazon_clone.amazon.member.dto.response.MemberResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,7 @@ public class MemberController {
     // 로그인
     @PostMapping("login")
     public ResponseEntity<MemberResponse> login(@RequestBody MemberLogin request) {
-        Member login = memberService.login(request);
+        MemberLoginResponse login = memberService.login(request);
         MemberResponse response = new MemberResponse(login, HttpStatus.OK);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

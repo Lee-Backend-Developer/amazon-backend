@@ -1,9 +1,10 @@
 package com.amazon_clone.amazon.member;
 
 import com.amazon_clone.amazon.member.domain.Member;
+import com.amazon_clone.amazon.member.dto.response.MemberLoginResponse;
 import com.amazon_clone.amazon.member.repository.MemberRepository;
-import com.amazon_clone.amazon.member.request.MemberLogin;
-import com.amazon_clone.amazon.member.request.MemberRegister;
+import com.amazon_clone.amazon.member.dto.request.MemberLogin;
+import com.amazon_clone.amazon.member.dto.request.MemberRegister;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -43,11 +43,19 @@ public class MemberService {
         memberRepository.deleteById(memberId);
     }
 
-    public Member login(MemberLogin login) {
+    public MemberLoginResponse login(MemberLogin login) {
         Optional<Member> getMember = memberRepository.findByEmailAndPassword(login.getEmail(), login.getPassword());
         if(getMember.isEmpty()) {
             throw new EntityNotFoundException("아이디 또는 비밀번호가 잘못되었습니다.");
         }
-        return getMember.get();
+
+        MemberLoginResponse response = MemberLoginResponse.builder()
+                .email(getMember.get().getEmail())
+                .name(getMember.get().getName())
+                .phoneNumber(getMember.get().getPhoneNumber())
+                .address(getMember.get().getAddress())
+                .build();
+
+        return response;
     }
 }

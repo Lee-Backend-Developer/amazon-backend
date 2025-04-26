@@ -1,4 +1,4 @@
-package com.amazon_clone.amazon.member.request;
+package com.amazon_clone.amazon.member.dto.request;
 
 import com.amazon_clone.amazon.member.domain.Role;
 import lombok.Builder;

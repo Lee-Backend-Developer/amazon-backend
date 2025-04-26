@@ -1,4 +1,4 @@
-package com.amazon_clone.amazon.member.request;
+package com.amazon_clone.amazon.member.dto.request;
 
 public class MemberLogin extends MemberRequest {
 

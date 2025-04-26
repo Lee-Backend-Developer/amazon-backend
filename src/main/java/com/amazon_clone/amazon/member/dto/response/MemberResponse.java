@@ -1,4 +1,4 @@
-package com.amazon_clone.amazon.member.response;
+package com.amazon_clone.amazon.member.dto.response;
 
 import com.amazon_clone.amazon.common.Response;
 import org.springframework.http.HttpStatus;
