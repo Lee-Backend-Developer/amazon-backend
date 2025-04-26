@@ -5,6 +5,7 @@ import com.amazon_clone.amazon.member.repository.MemberRepository;
 import com.amazon_clone.amazon.member.request.MemberLogin;
 import com.amazon_clone.amazon.member.request.MemberRegister;
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,9 @@ public class MemberService {
 
     public Member login(MemberLogin login) {
         Optional<Member> getMember = memberRepository.findByEmailAndPassword(login.getEmail(), login.getPassword());
+        if(getMember.isEmpty()) {
+            throw new EntityNotFoundException("아이디 또는 비밀번호가 잘못되었습니다.");
+        }
         return getMember.get();
     }
 }
