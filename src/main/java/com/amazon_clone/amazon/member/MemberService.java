@@ -24,7 +24,7 @@ public class MemberService {
     @Transactional
     public Member register(MemberRegister request) {
         // 중복 회원이 있는지 확인
-        if(!memberRepository.findByEmailEquals(request.getEmail()).isEmpty())
+        if(memberRepository.findByEmailEquals(request.getEmail()).isPresent())
             throw new EntityExistsException("이미 존재하는 회원입니다.");
 
         Member saveMember = Member.builder()
