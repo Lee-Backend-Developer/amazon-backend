@@ -17,6 +17,14 @@
 
 ---
 
+## 🗂 ERD (Entity Relationship Diagram)
+
+> 본 프로젝트에서 사용하는 데이터베이스 구조입니다.
+
+![ERD](./readme_img_folder/erd.png) <!-- 저장소 루트에 erd.png 파일을 저장했다고 가정 -->
+
+---
+
 ## ✅ 주요 기능
 
 - **상품 관리**: 상품 등록, 수정, 삭제
