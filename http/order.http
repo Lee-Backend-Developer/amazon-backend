@@ -1,5 +1,5 @@
 ### 주문 생성
-PUT http://127.0.0.1:8080/api/order/create
+PUT http://localhost:8080/api/order/create
 Content-Type: application/json
 
 {
@@ -8,4 +8,4 @@ Content-Type: application/json
 }
 
 ### 주문 조회
-GET http://127.0.0.1:8080/api/order/list?memberId=1
+GET http://localhost:8080/api/order/list?memberId=1

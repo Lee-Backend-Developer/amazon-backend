@@ -1,5 +1,5 @@
 # 물건 담기
-PUT http://127.0.0.1:8080/api/cart/add
+PUT http://localhost:8080/api/cart/add
 Content-Type: application/json
 
 {
@@ -10,8 +10,8 @@ Content-Type: application/json
 
 
 ### 카트 물건 조회
-GET http://127.0.0.1:8080/api/cart
+GET http://localhost:8080/api/cart
 
 ### 물건삭제
-DELETE 127.0.0.1:8080/api/cart/delete/1
+DELETE localhost:8080/api/cart/delete/1
 

@@ -1,5 +1,5 @@
 ### 제품 등록
-PUT http://127.0.0.1:8080/api/product/add
+PUT http://localhost:8080/api/product/add
 Content-Type: application/json
 
 {
@@ -11,8 +11,8 @@ Content-Type: application/json
 }
 
 ### 제품 조회
-GET http://127.0.0.1:8080/api/product
+GET http://localhost:8080/api/product
 
 
 ### 제품 삭제
-DELETE http://127.0.0.1:8080/api/product/delete/1
+DELETE http://localhost:8080/api/product/delete/1
