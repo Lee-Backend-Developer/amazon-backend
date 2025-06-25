@@ -54,14 +54,5 @@ public class WebSecurityConfig {
         return new NoOpPasswordEncoder();
     }
 
-   /* @Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
-        return http.getSharedObject(AuthenticationManagerBuilder.class)
-                .userDetailsService(memberDetailService)
-                .and().build();
-
-
-    }*/
-
 
 }
