@@ -1,0 +1,28 @@
+= Amazon Clone API 문서
+:toc: left
+:toclevels: 2
+:source-highlighter: highlightjs
+:sectlinks:
+:snippets: build/generated-snippets
+
+== 회원 API
+
+=== 회원 등록 (PUT /api/member/register)
+
+요청 예시와 응답 예시는 아래와 같습니다.
+
+==== 요청
+
+include::{snippets}/exampleTest/http-request.adoc[]
+
+==== 요청 필드
+
+include::{snippets}/exampleTest/request-fields.adoc[]
+
+==== 응답
+
+include::{snippets}/exampleTest/http-response.adoc[]
+
+==== 응답 필드
+
+include::{snippets}/exampleTest/response-fields.adoc[]
