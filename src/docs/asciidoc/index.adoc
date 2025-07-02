@@ -13,16 +13,16 @@
 
 ==== 요청
 
-include::{snippets}/exampleTest/http-request.adoc[]
+include::{snippets}/register/http-request.adoc[]
 
 ==== 요청 필드
 
-include::{snippets}/exampleTest/request-fields.adoc[]
+include::{snippets}/register/request-fields.adoc[]
 
 ==== 응답
 
-include::{snippets}/exampleTest/http-response.adoc[]
+include::{snippets}/register/http-response.adoc[]
 
 ==== 응답 필드
 
-include::{snippets}/exampleTest/response-fields.adoc[]
+include::{snippets}/register/response-fields.adoc[]
