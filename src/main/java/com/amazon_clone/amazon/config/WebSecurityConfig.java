@@ -40,8 +40,8 @@ public class WebSecurityConfig {
                 authorize
                         // 게스트 유저가 접근할 수 있는 URL
                         .requestMatchers("/api/member/login", "/api/member/register")
-                        .permitAll()
-                        .anyRequest().authenticated()
+                        .permitAll()// 로그인, 회원가입은 인증 없이 접근 가능
+                        .anyRequest().authenticated() // 로그인, 회원가입 외의 모든 요청은 인증 필요
         );
 
         http.logout(logout -> logout.logoutUrl("/api/member/logout"));
