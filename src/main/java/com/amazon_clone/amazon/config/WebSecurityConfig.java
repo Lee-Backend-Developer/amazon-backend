@@ -19,11 +19,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 public class WebSecurityConfig {
 
-    private final MemberDetailService memberDetailService;
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.formLogin(AbstractHttpConfigurer::disable);
         http.httpBasic(AbstractHttpConfigurer::disable);
         http.csrf(AbstractHttpConfigurer::disable);
         http.cors(AbstractHttpConfigurer::disable);
@@ -32,7 +29,7 @@ public class WebSecurityConfig {
                 formLogin.loginPage("/api/member/login")
                         .usernameParameter("email")
                         .passwordParameter("password")
-                        .successForwardUrl("/")
+                        .defaultSuccessUrl("/")
         );
 
         http.authorizeHttpRequests(
