@@ -26,8 +26,11 @@ import java.util.Optional;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.request.RequestDocumentation.formParameters;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(MemberController.class)
@@ -72,63 +75,26 @@ public class MemberApiTests {
                 .andExpect(status().isCreated())
                 .andDo(
                         document("register",
-                        requestFields(
-                                fieldWithPath("email").description("회원 이메일"),
-                                fieldWithPath("password").description("회원 비밀번호"),
-                                fieldWithPath("name").description("회원 이름"),
-                                fieldWithPath("phoneNumber").description("회원 전화번호"),
-                                fieldWithPath("address").description("회원 주소"),
-                                fieldWithPath("role").description("회원 역할")
-                        ),
-                        responseFields(
-                                fieldWithPath("response").description("null"),
-                                fieldWithPath("status").description("CREATED")
-                        )
-                ));
-
-    }
-
-    @DisplayName("로그인 API 테스트")
-    @Test
-    @WithMockUser(username = "test@naver.com", password = "1234")
-    void login() throws Exception {
-        // given
-        Member mockMember = Member.builder()
-                .email("test@naver.com")
-                .password("1234")
-                .build();
-
-        Mockito.when(memberRepository.findByEmailAndPassword("test@naver.com", "1234"))
-                .thenReturn(Optional.of(mockMember));
-
-        // when & then
-        mockMvc.perform(post("/api/member/login")
-                        .param("email", "test@naver.com")
-                        .param("password", "1234")
-                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                )
-                .andExpect(status().isOk())
-                .andDo(
-                        document("login",
                                 requestFields(
                                         fieldWithPath("email").description("회원 이메일"),
-                                        fieldWithPath("password").description("회원 비밀번호")
+                                        fieldWithPath("password").description("회원 비밀번호"),
+                                        fieldWithPath("name").description("회원 이름"),
+                                        fieldWithPath("phoneNumber").description("회원 전화번호"),
+                                        fieldWithPath("address").description("회원 주소"),
+                                        fieldWithPath("role").description("회원 역할")
                                 ),
                                 responseFields(
-                                        fieldWithPath("response.email").description("회원 이메일"),
-                                        fieldWithPath("response.name").description("회원 이름"),
-                                        fieldWithPath("response.phoneNumber").description("회원 전화번호"),
-                                        fieldWithPath("response.address").description("회원 주소"),
-                                        fieldWithPath("status").description("OK")
+                                        fieldWithPath("response").description("null"),
+                                        fieldWithPath("status").description("CREATED")
                                 )
                         ));
-    }
 
+    }
 
     @DisplayName("로그인 API 테스트")
     @Test
     @WithMockUser(username = "test@naver.com", password = "1234", roles = "ADMIN")
-    void login2() throws Exception {
+    void login() throws Exception {
         // Given
         Member mockMember = Member.builder()
                 .email("test@naver.com")
@@ -146,7 +112,15 @@ public class MemberApiTests {
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .param("email", "test@naver.com")
                         .param("password", "1234"))
-                .andExpect(status().isOk()); // 200 상태 코드 확인
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/")) // 200 상태 코드 확인
+                .andDo(
+                        document("login",
+                                formParameters(
+                                        parameterWithName("email").description("회원 이메일"),
+                                        parameterWithName("password").description("회원 비밀번호")
+                                )
+                        ));
 
     }
 
