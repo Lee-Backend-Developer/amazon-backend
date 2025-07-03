@@ -48,3 +48,25 @@ include::{snippets}/login/http-response.adoc[]
 ==== 응답 필드
 
 include::{snippets}/login/response-fields.adoc[]
+
+== 제품 API
+
+=== 제품 생성 (PUT /api/cart/add)
+
+요청 예시와 응답 예시는 아래와 같습니다.
+
+==== 요청
+
+include::{snippets}/add-product/http-request.adoc[]
+
+==== 요청 필드
+
+include::{snippets}/add-product/request-fields.adoc[]
+
+==== 응답
+
+include::{snippets}/add-product/http-response.adoc[]
+
+==== 응답 필드
+
+include::{snippets}/add-product/response-fields.adoc[]
