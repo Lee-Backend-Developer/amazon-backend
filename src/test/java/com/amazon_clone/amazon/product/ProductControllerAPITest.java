@@ -3,6 +3,7 @@ package com.amazon_clone.amazon.product;
 import com.amazon_clone.amazon.product.domain.Product;
 import com.amazon_clone.amazon.product.request.ProductAddRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,7 @@ class ProductControllerAPITest {
     private MockMvc mockMvc;
 
     @Test
+    @DisplayName("상품 등록 API 테스트")
     void addProduct_O() throws Exception {
         // Arrange
         ProductAddRequest request = new ProductAddRequest("Test Product", 10, "image.jpg", 100, "Description of test product");
