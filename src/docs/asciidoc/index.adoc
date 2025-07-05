@@ -86,3 +86,19 @@ include::{snippets}/add-product/http-response.adoc[]
 ==== 응답 필드
 
 include::{snippets}/add-product/response-fields.adoc[]
+
+=== 제품 삭제 (delete /api/product/delete/{id})
+
+요청 예시와 응답 예시는 아래와 같습니다.
+
+==== 요청
+
+include::{snippets}/delete-product/http-request.adoc[]
+
+==== 응답
+
+include::{snippets}/delete-product/http-response.adoc[]
+
+==== 응답 필드
+
+include::{snippets}/delete-product/response-fields.adoc[]
