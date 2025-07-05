@@ -10,9 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import java.util.List;
 
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
@@ -32,6 +37,52 @@ class ProductControllerAPITest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Test
+    @DisplayName("상품 조회 API 테스트")
+    void getProducts_O() throws Exception {
+        // Arrange
+        Product product = Product.builder()
+                .name("Test Product")
+                .cnt(10)
+                .mainImage("image.jpg")
+                .price(100)
+                .description("Description of test product")
+                .build();
+
+        Mockito.when(productService.productPages(Mockito.any()))
+                .thenReturn(new PageImpl<>(List.of(product)));
+
+        // Act & Assert
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/product"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.response.content[0].name").value("Test Product"))
+                .andDo(MockMvcRestDocumentation.document("get-products",
+                        responseFields(
+                                fieldWithPath("response.content[0].id").description("Product ID"),
+                                fieldWithPath("response.content[0].name").description("Product name"),
+                                fieldWithPath("response.content[0].cnt").description("Product cnt"),
+                                fieldWithPath("response.content[0].mainImage").description("Product mainImage URL"),
+                                fieldWithPath("response.content[0].price").description("Product price"),
+                                fieldWithPath("response.content[0].description").description("Product description"),
+                                fieldWithPath("response.content[0].categoryFk").description("Product category ID"),
+                                fieldWithPath("response.pageable").description("Pagination information"),
+                                fieldWithPath("response.last").description("last"),
+                                fieldWithPath("response.totalPages").description("Total number of pages"),
+                                fieldWithPath("response.first").description("Is first page"),
+                                fieldWithPath("response.totalElements").description("Total number of elements"),
+                                fieldWithPath("response.size").description("Size of each page"),
+                                fieldWithPath("response.number").description("Current page number"),
+                                fieldWithPath("response.sort.sorted").description("Is sorted"),
+                                fieldWithPath("response.sort.unsorted").description("Is unsorted"),
+                                fieldWithPath("response.sort.empty").description("Is empty"),
+                                fieldWithPath("response.numberOfElements").description("Number of elements in the current page"),
+                                fieldWithPath("response.empty").description("Is empty page"),
+                                fieldWithPath("status").description("Response status")
+                        )
+                ));
+    }
+
 
     @Test
     @DisplayName("상품 등록 API 테스트")
