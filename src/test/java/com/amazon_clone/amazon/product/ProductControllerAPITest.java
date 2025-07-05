@@ -15,6 +15,9 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -62,6 +65,27 @@ class ProductControllerAPITest {
                                 fieldWithPath("response.price").description("Product price"),
                                 fieldWithPath("response.description").description("Product description"),
                                 fieldWithPath("response.categoryFk").description("Product category ID"),
+                                fieldWithPath("status").description("Response status")
+                        )
+                ));
+    }
+
+    @Test
+    @DisplayName("상품 삭제 API 테스트")
+    void deleteProduct_O() throws Exception {
+        // Arrange
+        Long productId = 1L;
+        Mockito.doNothing().when(productService).delete(productId);
+
+        // Act & Assert
+        mockMvc.perform(delete("/api/product/delete/{id}", productId))
+                .andExpect(status().isOk())
+                .andDo(MockMvcRestDocumentation.document("delete-product",
+                        pathParameters(
+                                parameterWithName("id").description("Product ID to delete")
+                        ),
+                        responseFields(
+                                fieldWithPath("response").description("Response object, null if successful"),
                                 fieldWithPath("status").description("Response status")
                         )
                 ));
